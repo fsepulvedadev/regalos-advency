@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/panchixnrc/regalos-advency/static/css/main.3f3f1caf.css",
+    "main.js": "/panchixnrc/regalos-advency/static/js/main.d0ffecf1.js",
+    "static/media/fondo.jpg": "/panchixnrc/regalos-advency/static/media/fondo.2152501e99fad2cd9cdc.jpg",
+    "index.html": "/panchixnrc/regalos-advency/index.html",
+    "main.3f3f1caf.css.map": "/panchixnrc/regalos-advency/static/css/main.3f3f1caf.css.map",
+    "main.d0ffecf1.js.map": "/panchixnrc/regalos-advency/static/js/main.d0ffecf1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3f3f1caf.css",
+    "static/js/main.d0ffecf1.js"
+  ]
+}
