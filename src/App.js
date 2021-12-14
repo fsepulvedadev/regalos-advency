@@ -1,24 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import Lista from "./components/Lista";
+import RegalosContextProvider from "./context/RegalosContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RegalosContextProvider>
+      <div className="text-center bg-[url('/assets/fondo.jpg')] h-screen w-full flex flex-col justify-center items-center">
+        <Lista />{" "}
+      </div>
+    </RegalosContextProvider>
   );
 }
 
