@@ -1,11 +1,29 @@
-import { React, useContext, useState } from "react";
+import { React, useContext, useState, useEffect } from "react";
 import { RegalosContext } from "../context/RegalosContext";
 
 function Form() {
-  const { addRegalo, handleVacio } = useContext(RegalosContext);
+  const {
+    addRegalo,
+    handleVacio,
+    editado,
+    editRegalo,
+    handleRepetido,
+    setRepetido,
+    repetido,
+  } = useContext(RegalosContext);
 
   const [nombre, setNombre] = useState("");
-  const [cantidad, setCantidad] = useState(null);
+  const [cantidad, setCantidad] = useState(1);
+
+  useEffect(() => {
+    if (editado !== null) {
+      setNombre(editado.nombre);
+      setCantidad(editado.cantidad);
+      console.log(editado);
+    } else {
+      setNombre("");
+    }
+  }, [editado]);
 
   const handleChangeNombre = (e) => {
     setNombre(e.target.value);
@@ -16,10 +34,19 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (nombre === "") {
-      handleVacio(true);
+    console.log(handleRepetido(nombre));
+
+    if (editado === null) {
+      if (nombre === "") {
+        handleVacio(true);
+      } else if (handleRepetido(nombre)) {
+        console.log("repetido");
+      } else {
+        addRegalo(nombre, cantidad);
+        setNombre("");
+      }
     } else {
-      addRegalo(nombre, cantidad);
+      editRegalo(nombre, editado.id, cantidad);
       setNombre("");
     }
   };
@@ -48,11 +75,12 @@ function Form() {
             name=""
             id="cantidad"
             min="1"
+            value={cantidad}
           />
         </div>
 
         <button className="p-[2px] h-10 w-30 md:w-3/12 bg-buttercup-500 border-transparent text-red-oxide-400 font-bold rounded active:transform active:translate-y-1">
-          Agregar
+          {editado !== null ? "Editar" : " Agregar"}
         </button>
       </form>
     </div>

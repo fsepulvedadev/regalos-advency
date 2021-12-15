@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { RegalosContext } from "../context/RegalosContext";
+import { PencilAltIcon, XIcon } from "@heroicons/react/outline";
 
 const Regalo = (props) => {
-  const { delRegalo } = useContext(RegalosContext);
+  const { delRegalo, findRegalo } = useContext(RegalosContext);
 
   return (
     <li
@@ -13,14 +14,25 @@ const Regalo = (props) => {
         <p>{props.cantidad}</p>
         <p>{props.regalo}</p>
       </div>
-      <button
-        onClick={() => {
-          delRegalo(props.id);
-        }}
-        className="w-8 h-8 p-1 mr-4 font-bold text-center transition-all duration-75 rounded text-red-oxide-500 bg-red-oxide-400 active:transform active:translate-y-1 focus:ring"
-      >
-        X
-      </button>
+      <div className="flex items-center w-1/6 justify-evenly">
+        <button
+          onClick={() => {
+            findRegalo(props.id);
+          }}
+          className="w-8 h-8 p-0 font-bold text-center transition-all duration-75 rounded text-jewel-500 bg-red-oxide-400 active:transform active:translate-y-1 focus:ring"
+        >
+          <PencilAltIcon />
+        </button>
+
+        <button
+          onClick={() => {
+            delRegalo(props.id);
+          }}
+          className="w-8 h-8 p-0 ml-1 font-bold text-center transition-all duration-75 rounded text-jewel-500 bg-red-oxide-400 active:transform active:translate-y-1 focus:ring"
+        >
+          <XIcon />
+        </button>
+      </div>
     </li>
   );
 };

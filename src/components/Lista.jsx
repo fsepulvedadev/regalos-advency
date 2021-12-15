@@ -4,14 +4,18 @@ import Regalo from "./Regalo";
 import { RegalosContext } from "../context/RegalosContext";
 
 const Lista = () => {
-  const { regalos, clearRegalos, vacio } = useContext(RegalosContext);
+  const { regalos, clearRegalos, vacio, repetido } = useContext(RegalosContext);
+
+  console.log("Repetido de la lista", repetido);
 
   return (
     <>
-      {vacio ? (
+      {vacio || repetido ? (
         <div className="absolute flex items-center justify-center w-full h-screen">
           <h1 className="self-start w-full text-xl text-center text-red-700 bg-red-400">
-            Ingrese nombre y cantidad del regalo.
+            {repetido
+              ? " Ese regalo ya se ingreso."
+              : "Ingrese nombre y cantidad del regalo."}
           </h1>
         </div>
       ) : null}
