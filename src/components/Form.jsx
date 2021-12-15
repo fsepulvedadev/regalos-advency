@@ -2,15 +2,8 @@ import { React, useContext, useState, useEffect } from "react";
 import { RegalosContext } from "../context/RegalosContext";
 
 function Form() {
-  const {
-    addRegalo,
-    handleVacio,
-    editado,
-    editRegalo,
-    handleRepetido,
-    setRepetido,
-    repetido,
-  } = useContext(RegalosContext);
+  const { addRegalo, handleVacio, editado, editRegalo, handleRepetido } =
+    useContext(RegalosContext);
 
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState(1);
