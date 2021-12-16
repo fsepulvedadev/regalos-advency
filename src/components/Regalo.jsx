@@ -14,13 +14,16 @@ const Regalo = (props) => {
       <div className="text-xl font-bold md:ml-4 text-red-oxide-400">
         <p>{props.cantidad}x </p>
       </div>
-      <div>
-        <img
-          className="object-scale-down w-20 h-12"
-          src={props.imagen}
-          alt=""
-        />
-      </div>
+      {props.imagen ? (
+        <div>
+          <img
+            className="object-scale-down w-20 h-12"
+            src={props.imagen}
+            alt=""
+          />
+        </div>
+      ) : null}
+
       <div className="flex flex-col items-start w-8/12 ml-2 font-sans font-bold text-md md:text-xl text-jewel-500 md:w-1/2">
         <p>{props.regalo}</p>
         <h2 className="font-normal">{props.destinatario}</h2>

@@ -24,6 +24,8 @@ function Form() {
     if (editado !== null) {
       setNombre(editado.nombre);
       setCantidad(editado.cantidad);
+      setDestinatario(editado.destinatario);
+      setImagen(editado.imagen);
       console.log(editado);
     } else {
       setNombre("");

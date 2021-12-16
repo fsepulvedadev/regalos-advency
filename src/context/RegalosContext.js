@@ -71,9 +71,9 @@ const RegalosContextProvider = (props) => {
     setEditado(regalo);
   };
 
-  const editRegalo = (nombre, id, cantidad) => {
+  const editRegalo = (nombre, id, cantidad, imagen, destinatario) => {
     const newRegalo = regalos.map((regalo) =>
-      regalo.id === id ? { nombre, id, cantidad } : regalo
+      regalo.id === id ? { nombre, id, cantidad, imagen, destinatario } : regalo
     );
     setRegalos(newRegalo);
     setEditado(null);
