@@ -11,14 +11,22 @@ const RegalosContextProvider = (props) => {
   const [vacio, setVacio] = useState(false);
   const [repetido, setRepetido] = useState(false);
   const [editado, setEditado] = useState(null);
+  const [editando, setEditando] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("regalos", JSON.stringify(regalos));
   }, [regalos]);
 
   // Agregar Regalo
-  const addRegalo = (nombre, cantidad) => {
-    setRegalos([...regalos, { nombre, id: uuid(), cantidad }]);
+  const addRegalo = (nombre, cantidad, imagen, destinatario) => {
+    console.log(imagen);
+    setRegalos([
+      ...regalos,
+      { nombre, id: uuid(), cantidad, imagen, destinatario },
+    ]);
+    console.log(regalos);
+    setShowModal(false);
   };
 
   // Eliminar Regalo
@@ -84,8 +92,11 @@ const RegalosContextProvider = (props) => {
         editRegalo,
         editado,
         handleRepetido,
-        setRepetido,
         repetido,
+        editando,
+        setEditando,
+        showModal,
+        setShowModal,
       }}
     >
       {props.children}
