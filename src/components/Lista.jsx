@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import Form from "./Form";
 import Regalo from "./Regalo";
 import { RegalosContext } from "../context/RegalosContext";
 
 const Lista = () => {
-  const { regalos, clearRegalos, repetido } = useContext(RegalosContext);
+  const { regalos, clearRegalos, repetido,sumarRegalos,total } = useContext(RegalosContext);
+
+  useEffect(()=> {
+    sumarRegalos()
+  },[regalos])
 
   console.log("Repetido de la lista", repetido);
 
@@ -30,6 +34,7 @@ const Lista = () => {
                       cantidad={regalo.cantidad}
                       id={regalo.id}
                       destinatario={regalo.destinatario}
+                      precio={regalo.precio}
                     />
                   );
                 })}
@@ -40,6 +45,11 @@ const Lista = () => {
                 No hay Regalos en la lista!{" "}
               </div>
             )}
+          </div>
+        </div>
+        <div className='w-full flex items-center justify-center'>
+          <div className='flex items-center font-bold text-buttercup-700 text-center justify-center w-8/12 h-10 p-0.5 py-6 my-1 border-2 rounded border-buttercup-500 bg-buttercup-500'>
+            <p className='text-2xl'>Total {`$${total}`}</p>
           </div>
         </div>
 

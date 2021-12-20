@@ -13,12 +13,18 @@ function Form() {
     vacio,
     repetido,
     editando,
+      aleatorios,
+      setAleatorios,
+      setEditado,
+      duplicado
   } = useContext(RegalosContext);
 
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState(1);
   const [imagen, setImagen] = useState("");
   const [destinatario, setDestinatario] = useState("");
+  const [precio, setPrecio] = useState("");
+
 
   useEffect(() => {
     if (editado !== null) {
@@ -26,11 +32,25 @@ function Form() {
       setCantidad(editado.cantidad);
       setDestinatario(editado.destinatario);
       setImagen(editado.imagen);
+      setPrecio(editado.precio)
       console.log(editado);
     } else {
       setNombre("");
     }
   }, [editado]);
+
+  useEffect(() => {
+    if (duplicado !== null) {
+      setNombre(duplicado.nombre);
+      setCantidad(duplicado.cantidad);
+      setDestinatario(duplicado.destinatario);
+      setImagen(duplicado.imagen);
+      setPrecio(duplicado.precio)
+      setShowModal(true)
+    } else {
+      setNombre("");
+    }
+  }, [duplicado]);
 
   const handleChangeImagen = (e) => {
     const newImage = e.target.value;
@@ -39,6 +59,14 @@ function Form() {
 
     setImagen(newImage);
   };
+  const handleSorpresa = (e) => {
+    e.preventDefault()
+   const numAleatorio = Math.floor(Math.random() * (aleatorios.length + 1))
+
+   const selected = aleatorios[numAleatorio]
+    setEditado(selected)
+    addRegalo(editado.nombre,editado.cantidad,editado.imagen,editado.destinatario,editado.precio)
+  }
   const handleChangeDestinatario = (e) => {
     setDestinatario(e.target.value);
   };
@@ -48,22 +76,28 @@ function Form() {
   const handleChangeNumber = (e) => {
     setCantidad(e.target.value);
   };
+
+  const handleChangePrecio = (e) => {
+    setPrecio(e.target.value);
+  };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(handleRepetido(nombre));
+    console.log(handleRepetido(nombre,destinatario));
 
     if (editado === null) {
       if (nombre === "") {
         handleVacio(true);
-      } else if (handleRepetido(nombre)) {
+      } else if (handleRepetido(nombre,destinatario)) {
         console.log("repetido");
       } else {
-        addRegalo(nombre, cantidad, imagen, destinatario);
+        addRegalo(nombre, cantidad, imagen, destinatario,precio);
         setNombre("");
       }
     } else {
-      editRegalo(nombre, editado.id, cantidad, imagen, destinatario);
+      editRegalo(nombre, editado.id, cantidad, imagen, destinatario,precio);
       setNombre("");
       setShowModal(false);
     }
@@ -94,8 +128,7 @@ function Form() {
                 <label
                   className="pr-2 font-bold text-buttercup-500"
                   htmlFor="text-regalo"
-                >
-                  Nombre del Regalo
+                >Regalo
                 </label>
                 <input
                   onChange={handleChangeNombre}
@@ -120,6 +153,21 @@ function Form() {
                   value={destinatario}
                 />
               </div>
+              <div>
+                <label
+                    className="pr-2 font-bold text-buttercup-500"
+                    htmlFor="precio"
+                >
+                  Precio
+                </label>
+                <input
+                    onChange={handleChangePrecio}
+                    id="precio"
+                    type="number"
+                    className="w-full h-10 border-transparent rounded bg-red-oxide-400 text-buttercup-500"
+                    value={precio}
+                />
+              </div>
             </div>
 
             <div className="flex items-center justify-around w-full md:w-full">
@@ -138,6 +186,7 @@ function Form() {
                   value={imagen}
                 />
               </div>
+
               <div className="flex flex-col items-center justify-center w-8/12 my-4 md:w-6/12">
                 <label
                   className="p-0 font-bold text-center md:pr-2 text-buttercup-500"
@@ -158,10 +207,15 @@ function Form() {
               </div>
             </div>
           </div>
+          <div className='w-full flex justify-around'>
+            <button className="p-[2px] h-10 w-30 md:w-3/12 bg-buttercup-500 border-transparent text-red-oxide-400 font-bold rounded active:transform active:translate-y-1">
+              {editado !== null ? "Editar" : " Agregar"}
+            </button>
+            <button onClick={handleSorpresa} className="p-[2px] h-10 w-30 md:w-3/12 bg-buttercup-500 border-transparent text-red-oxide-400 font-bold rounded active:transform active:translate-y-1">
+              Sorprendeme!
+            </button>
+          </div>
 
-          <button className="p-[2px] h-10 w-30 md:w-3/12 bg-buttercup-500 border-transparent text-red-oxide-400 font-bold rounded active:transform active:translate-y-1">
-            {editado !== null ? "Editar" : " Agregar"}
-          </button>
         </form>
       </div>
     </Modal>

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { RegalosContext } from "../context/RegalosContext";
-import { PencilAltIcon, XIcon } from "@heroicons/react/outline";
+import { PencilAltIcon, XIcon,DuplicateIcon } from "@heroicons/react/outline";
 
 const Regalo = (props) => {
-  const { delRegalo, findRegalo, setEditando, setShowModal } =
+  const { delRegalo, findRegalo, setEditando, setShowModal,handleDuplicado } =
     useContext(RegalosContext);
 
   return (
@@ -12,7 +12,7 @@ const Regalo = (props) => {
       className="flex items-center justify-between w-full h-24 p-0.5 py-6 my-1 border-2 rounded md:w-11/12 md:h-10 border-buttercup-500 bg-buttercup-500"
     >
       <div className="text-xl font-bold md:ml-4 text-red-oxide-400">
-        <p>{props.cantidad}x </p>
+        <p>{props.cantidad}x </p> <p>{`$${props.precio}`}</p>
       </div>
       {props.imagen ? (
         <div>
@@ -38,6 +38,16 @@ const Regalo = (props) => {
           className="w-8 h-8 p-0 font-bold text-center transition-all duration-75 rounded text-jewel-500 bg-red-oxide-400 active:transform active:translate-y-1 focus:ring"
         >
           <PencilAltIcon />
+
+        </button>
+        <button
+            onClick={() => {
+             handleDuplicado(props.id);
+             setShowModal(true)
+            }}
+            className="w-8 h-8 p-0 ml-1 font-bold text-center transition-all duration-75 rounded text-jewel-500 bg-red-oxide-400 active:transform active:translate-y-1 focus:ring"
+        >
+          <DuplicateIcon />
         </button>
 
         <button
@@ -48,6 +58,7 @@ const Regalo = (props) => {
         >
           <XIcon />
         </button>
+
       </div>
     </li>
   );
