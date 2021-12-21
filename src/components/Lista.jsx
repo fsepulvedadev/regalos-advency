@@ -1,14 +1,15 @@
-import React, { useContext,useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Form from "./Form";
 import Regalo from "./Regalo";
 import { RegalosContext } from "../context/RegalosContext";
 
 const Lista = () => {
-  const { regalos, clearRegalos, repetido,sumarRegalos,total } = useContext(RegalosContext);
+  const { regalos, clearRegalos, repetido, sumarRegalos, total } =
+    useContext(RegalosContext);
 
-  useEffect(()=> {
-    sumarRegalos()
-  },[regalos])
+  useEffect(() => {
+    sumarRegalos();
+  }, [regalos, sumarRegalos]);
 
   console.log("Repetido de la lista", repetido);
 
@@ -47,9 +48,9 @@ const Lista = () => {
             )}
           </div>
         </div>
-        <div className='w-full flex items-center justify-center'>
-          <div className='flex items-center font-bold text-buttercup-700 text-center justify-center w-8/12 h-10 p-0.5 py-6 my-1 border-2 rounded border-buttercup-500 bg-buttercup-500'>
-            <p className='text-2xl'>Total {`$${total}`}</p>
+        <div className="flex items-center justify-center w-full">
+          <div className="flex items-center font-bold text-buttercup-700 text-center justify-center w-8/12 h-10 p-0.5 py-6 my-1 border-2 rounded border-buttercup-500 bg-buttercup-500">
+            <p className="text-2xl">Total {`$${total}`}</p>
           </div>
         </div>
 
@@ -62,6 +63,13 @@ const Lista = () => {
           Borrar Todos
         </button>
       </div>
+      <footer className="flex items-center justify-center mt-4 text-xl text-center text-black">
+        Creado por{" "}
+        <a
+          className="ml-1 font-bold text-jewel-500"
+          href="https://fsepulveda.netlify.app/"
+        >{` Fsepulveda`}</a>
+      </footer>
     </>
   );
 };

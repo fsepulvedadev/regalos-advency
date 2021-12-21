@@ -14,9 +14,9 @@ function Form() {
     repetido,
     editando,
       aleatorios,
-      setAleatorios,
       setEditado,
-      duplicado
+      duplicado,
+      setDuplicado
   } = useContext(RegalosContext);
 
   const [nombre, setNombre] = useState("");
@@ -46,7 +46,7 @@ function Form() {
       setDestinatario(duplicado.destinatario);
       setImagen(duplicado.imagen);
       setPrecio(duplicado.precio)
-      setShowModal(true)
+
     } else {
       setNombre("");
     }
@@ -61,11 +61,11 @@ function Form() {
   };
   const handleSorpresa = (e) => {
     e.preventDefault()
-   const numAleatorio = Math.floor(Math.random() * (aleatorios.length + 1))
-
+   const numAleatorio = Math.floor(Math.random() * (aleatorios.length))
+  console.log('aleatorio', numAleatorio)
    const selected = aleatorios[numAleatorio]
-    setEditado(selected)
-    addRegalo(editado.nombre,editado.cantidad,editado.imagen,editado.destinatario,editado.precio)
+    setDuplicado(selected)
+    addRegalo(duplicado.nombre,duplicado.cantidad,duplicado.imagen,duplicado.destinatario,duplicado.precio)
   }
   const handleChangeDestinatario = (e) => {
     setDestinatario(e.target.value);

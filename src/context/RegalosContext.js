@@ -145,6 +145,7 @@ const RegalosContextProvider = (props) => {
           sumarRegalos,
           total,
           duplicado,
+          setDuplicado,
           handleDuplicado
       }}
     >
